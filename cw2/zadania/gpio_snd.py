@@ -27,8 +27,9 @@ def cycle(gpio: gpio4.SysfsGPIO, frequency: int, fill: float = 0.5):
 
 
 
-for frequency in frequencies:
-    cycle(buzzer, frequency, fill)
-    time.sleep(0.1)
+for f in frequencies:
+    timestamp = time.time() + one_duration
+    while time.time() < timestamp:
+        cycle(buzzer, f, fill)
 
 buzzer.export = False

@@ -26,6 +26,5 @@ for index, fill in enumerate(range(MIN_PERCENT, MAX_PERCENT, 10)):
     t = 1/len(pwm_signal)
     for value in pwm_signal:
         gpio27.value = value
-        time.sleep(t)
 
 gpio27.export = False # release the pin

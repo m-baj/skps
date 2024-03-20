@@ -1,4 +1,4 @@
-import numpy as np
+
 import gpio4
 import time
 
@@ -12,9 +12,9 @@ MAX_PERCENT = 100
 
 def generate_variable_fill_pwm(frequency, fill):
     period = 1 / (frequency * 10000)
-    t = np.arange(0, 1, period)
-    pwm_signal = np.zeros(len(t))
-    pwm_signal[: int(fill * len(t))] = 1
+    len_t = int(1/period)
+    pwm_signal = [0] * len_t
+    pwm_signal[: int(fill * len_t)] = 1
     return pwm_signal
 
 

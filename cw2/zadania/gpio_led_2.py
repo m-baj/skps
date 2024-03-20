@@ -24,6 +24,6 @@ def main():
         t = 1/len(pwm_signal)
         for value in pwm_signal:
             gpio27.value = value
-            time.sleep(t)
+            time.sleep(1)
 
 gpio27.export = False # release the pin

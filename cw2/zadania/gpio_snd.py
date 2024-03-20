@@ -9,20 +9,26 @@ buzzer = gpio4.SysfsGPIO(19)
 buzzer.export = True
 buzzer.direction = 'out'
 
+
+def calculate_up_down(frequency: int, fill: float = 0.5):
+    t = 1 / frequency
+    hi = t * fill
+    lo = t - hi
+
+    return hi, lo
+
+
+def cycle(gpio: gpio4.SysfsGPIO, frequency: int, fill: float = 0.5):
+    hi, lo = calculate_up_down(frequency, fill)
+    gpio.value = 1
+    time.sleep(hi)
+    gpio.value = 0
+    time.sleep(lo)
+
+
+
 for frequency in frequencies:
-    period = 1 / frequency
-    t = time.time()
-    while True:
-        buzzer.value = buzzer.value ^ 1
-        time.sleep(period/2)
-        if time.time() - t > one_duration:
-            break
+    cycle(gpio, frequency, fill)
+    time.sleep(0.1)
 
-    # while time.time() - t < one_duration:
-    #     if time.time() - t < fill * period:
-    #         buzzer.value = 1
-    #     else:
-    #         buzzer.value = 0
 buzzer.export = False
-
-

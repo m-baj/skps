@@ -13,7 +13,10 @@ buzzer = gpio4.SysfsGPIO(19)
 buzzer.export = True
 buzzer.direction = 'out'
 
-buzzer.value = 1
+while True:
+    buzzer.value = 1
+    time.sleep(1)
+    buzzer.value = 0
 
 time.sleep(10)
 

@@ -14,7 +14,7 @@ for frequency in frequencies:
     t = time.time()
     while True:
         buzzer.value = buzzer.value ^ 1
-        time.sleep(period)
+        time.sleep(period/2)
         if time.time() - t > one_duration:
             break
 

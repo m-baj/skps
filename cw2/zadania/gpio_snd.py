@@ -15,19 +15,20 @@ buzzer.direction = 'out'
 
 buzzer.value = 1
 
+time.sleep(10)
 
-try:
-    for frequency in frequencies:
-        period = 1 / frequency
-        t = time.time()
-        while time.time() - t < one_duration:
-            if time.time() - t < fill * period:
-                buzzer.value = 1
-            else:
-                buzzer.value = 0
-except:
-    raise Exception
-finally:
-    buzzer.export = False
+# try:
+#     for frequency in frequencies:
+#         period = 1 / frequency
+#         t = time.time()
+#         while time.time() - t < one_duration:
+#             if time.time() - t < fill * period:
+#                 buzzer.value = 1
+#             else:
+#                 buzzer.value = 0
+# except:
+#     raise Exception
+# finally:
+buzzer.export = False
 
 

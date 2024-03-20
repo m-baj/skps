@@ -11,11 +11,13 @@ buzzer.direction = 'out'
 
 for frequency in frequencies:
     period = 1 / frequency
-
-    for _ in range(0, 5, period):
+    t = time.time()
+    while True:
         buzzer.value = buzzer.value ^ 1
         time.sleep(period)
-    # t = time.time()
+        if time.time() - t > one_duration:
+            break
+
     # while time.time() - t < one_duration:
     #     if time.time() - t < fill * period:
     #         buzzer.value = 1

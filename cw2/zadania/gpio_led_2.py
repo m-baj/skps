@@ -1,31 +1,24 @@
+import gpio4, time
+from math import sin, pi
+ 
+led27 = gpio4.SysfsGPIO(27)
+led27.export = True
+led27.direction = 'out'
 
-import gpio4
-import time
+timestamp = 0
+freq = 100
+wait = 1e-4
 
-gpio27 = gpio4.SysfsGPIO(27)
-gpio27.export = True # use the pin
-gpio27.direction = 'out' 
-
-MIN_PERCENT = 0
-MAX_PERCENT = 100
-
-
-def generate_variable_fill_pwm(frequency, fill):
-    period = 1 / (frequency)
-    len_t = int(1/period)
-    pwm_signal = [0 for _ in range(len_t)]
-
-    for i in range(int(fill*len_t)):
-        pwm_signal[i] = 1
-    return pwm_signal
-
-
-
-for index, fill in enumerate(range(MIN_PERCENT, MAX_PERCENT, 10)):
-    pwm_signal = generate_variable_fill_pwm(1000000, fill / 100)
-    t = 1/len(pwm_signal)
-    for value in pwm_signal:
-        gpio27.value = value
-        time.sleep(t)
-
-gpio27.export = False # release the pin
+try:
+    while timestamp < 10:
+        duty_cycle = abs(sin(pi*timestamp/2))
+        if timestamp % (1 / freq) < (1/freq)*duty_cycle:
+            led27.value = 1
+        else:
+            led27.value = 0
+        timestamp += wait
+        time.sleep(wait)
+except:
+    raise Exception
+finally:
+    led27.export = False

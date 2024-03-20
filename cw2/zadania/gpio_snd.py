@@ -13,6 +13,8 @@ buzzer = gpio4.SysfsGPIO(19)
 buzzer.export = True
 buzzer.direction = 'out'
 
+buzzer.value = 1
+
 
 try:
     for frequency in frequencies:

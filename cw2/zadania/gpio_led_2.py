@@ -11,7 +11,7 @@ MAX_PERCENT = 100
 
 
 def generate_variable_fill_pwm(frequency, fill):
-    period = 1 / (frequency * 10000)
+    period = 1 / (frequency)
     len_t = int(1/period)
     pwm_signal = [0 for _ in range(len_t)]
 
@@ -22,9 +22,10 @@ def generate_variable_fill_pwm(frequency, fill):
 
 
 for index, fill in enumerate(range(MIN_PERCENT, MAX_PERCENT, 10)):
-    pwm_signal = generate_variable_fill_pwm(1, fill / 100)
+    pwm_signal = generate_variable_fill_pwm(100, fill / 100)
     t = 1/len(pwm_signal)
     for value in pwm_signal:
         gpio27.value = value
+        time.sleep(t)
 
 gpio27.export = False # release the pin

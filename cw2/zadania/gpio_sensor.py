@@ -15,11 +15,10 @@ time.sleep(0.00001)
 value = 0
 t = time.time()
 while True:
-    print(sensor.value)
-    # if(value != sensor.value):
-    #     d = time.time() - t
-    #     t = time.time()
-    #     print(d * 34300 / 2)
-    #     value = sensor.value
+    if(sensor.value==1):
+        d = time.time() - t
+        t = time.time()
+        print(d * 34300 / 2)
+        value = sensor.value
 
 sensor.export = False

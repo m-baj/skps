@@ -28,7 +28,7 @@ def cycle(gpio: gpio4.SysfsGPIO, frequency: int, fill: float = 0.5):
 
 
 for frequency in frequencies:
-    cycle(gpio, frequency, fill)
+    cycle(buzzer, frequency, fill)
     time.sleep(0.1)
 
 buzzer.export = False

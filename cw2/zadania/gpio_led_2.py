@@ -13,8 +13,10 @@ MAX_PERCENT = 100
 def generate_variable_fill_pwm(frequency, fill):
     period = 1 / (frequency * 10000)
     len_t = int(1/period)
-    pwm_signal = [0] * len_t
-    pwm_signal[: int(fill * len_t)] = 1
+    pwm_signal = [0 for _ in range(len_t)]
+
+    for i in range(int(fill*len_t)):
+        pwm_signal[i] = 1
     return pwm_signal
 
 

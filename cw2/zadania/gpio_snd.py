@@ -12,18 +12,18 @@ buzzer.direction = 'out'
 
 def calculate_up_down(frequency: int, fill: float = 0.5):
     t = 1 / frequency
-    hi = t * fill
-    lo = t - hi
+    up = t * fill
+    down = t - up
 
-    return hi, lo
+    return up, down
 
 
 def cycle(gpio: gpio4.SysfsGPIO, frequency: int, fill: float = 0.5):
-    hi, lo = calculate_up_down(frequency, fill)
+    up, down = calculate_up_down(frequency, fill)
     gpio.value = 1
-    time.sleep(hi)
+    time.sleep(up)
     gpio.value = 0
-    time.sleep(lo)
+    time.sleep(down)
 
 
 

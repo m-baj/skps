@@ -15,7 +15,7 @@ buzzer.direction = 'out'
 
 while True:
     buzzer.value = 1
-    time.sleep(1)
+    # time.sleep(1)
     buzzer.value = 0
 
 time.sleep(10)
